@@ -9,6 +9,9 @@
 Official documentation: <https://nitis-languages.github.io>
 > Later
 
+### Supported OS
+Currently development aimed to Windows, but in future we are planning add support to more systems.
+
 ## How can I contribute?
 > Later
 
