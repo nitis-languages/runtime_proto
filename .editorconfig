@@ -1,0 +1,29 @@
+root = true
+
+[**]
+charset = utf-8
+end_of_line = crlf
+
+[*.{h,c,cpp,cxx,cc}]
+# Indentation
+tab_width = 4
+indent_style = tab
+indent_size = 4
+
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+# C/C++ style
+cpp_indent_goto_labels = one_left
+cpp_new_line_before_open_brace_namespace = same_line
+cpp_new_line_before_open_brace_type = same_line
+cpp_new_line_before_open_brace_block = same_line
+cpp_new_line_scope_braces_on_separate_lines = true
+cpp_new_line_before_catch = false
+cpp_new_line_before_else = false
+cpp_new_line_before_while_in_do_while = false
+
+cpp_space_before_function_open_parenthesis = remove
+
+cpp_space_pointer_reference_alignment = right
+cpp_space_around_ternary_operator = insert
