@@ -1,3 +1,6 @@
+// Licensed to the NiTiS-Dev under one or more agreements.
+// The NiTiS-Dev licenses this file to you under the MIT license.
+
 #ifndef _ARCH_H
 #define _ARCH_H
 

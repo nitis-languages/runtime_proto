@@ -1,3 +1,6 @@
+// Licensed to the NiTiS-Dev under one or more agreements.
+// The NiTiS-Dev licenses this file to you under the MIT license.
+
 #ifndef _CALLCONV_H
 #define _CALLCONV_H
 #include "../nlr-core-api.h"
