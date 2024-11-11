@@ -12,8 +12,34 @@ Official documentation: <https://nitis-languages.github.io>
 ### Supported OS
 Currently development aimed to Windows, but in future we are planning add support to more systems.
 
-## How can I contribute?
-> Later
+## About Contribution
+You can read contribution rules in [this file](CONTRIBUTING.md)
 
 ## How to build
-> Later
+Before building ensure that our OS is supported
+
+Requirements:
++ CMake [\[download\]](https://cmake.org/download/)
++ C/C++ compiler:
+	+ MSVC on Windows [\[download\]](https://visualstudio.microsoft.com/downloads/)
+
+### Build via terminal
+#### Windows
+
+Create build files
+```shell
+cmake -Ssrc/nlr-core/ -Bbuild
+```
+
+Build project
+```shell
+cmake --build build --config Release
+```
+
+The output files will be in `bin/` directory.
+
+### Build via IDE
+#### VSCode
+You can use `CTRL+SHIFT+D` to open *Run and Debug* menu in VSCode.  
+In this menu choose suitable option for you.
+Then press green button or `F5` key on keyboard to launch.
