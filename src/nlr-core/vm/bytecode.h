@@ -1,8 +1,8 @@
 // Licensed to the NiTiS-Dev under one or more agreements.
 // The NiTiS-Dev licenses this file to you under the MIT license.
 
-#ifndef _BYTECODE_H
-#define _BYTECODE_H
+#ifndef _NLR_BYTECODE_H
+#define _NLR_BYTECODE_H
 
 #include "../support.h"
 
