@@ -18,7 +18,6 @@ else()
 endif()
 
 set(NLR_SRC
-	${CMAKE_CURRENT_LIST_DIR}/test.cpp
 	${CMAKE_CURRENT_LIST_DIR}/vm/runtime.cpp
 	${CMAKE_CURRENT_LIST_DIR}/vm/domain.cpp
 )
