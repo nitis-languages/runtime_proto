@@ -66,14 +66,63 @@ typedef double		Float64;
 #define NLR_END_SUBNAMESPACE								\
 	} NLR_END_NAMESPACE
 
-// Type restrictions
+/// @brief Removes default constructors.
 #define NLR_TYPE_REMOVE_CONSTRUCTORS(type)					\
 	type() = delete;										\
 	type(const type& other) = delete;						\
 	type& operator=(const type& other) = delete;
 
+/// @brief Removes default copy constructors.
 #define NLR_TYPE_REMOVE_COPY(type)							\
 	type(const type& other) = delete;						\
 	type& operator=(const type& other) = delete;
+
+/// @brief Defines comparable operators for enum.
+#define NLR_ENUM_COMPARABLE(T)																\
+	static NLR_INLINE bool operator<(T a, T b) noexcept {									\
+		return (std::underlying_type<T>::type)(a) < (std::underlying_type<T>::type)(b);		\
+	}																						\
+	static NLR_INLINE bool operator<=(T a, T b) noexcept {									\
+		return (std::underlying_type<T>::type)(a) <= (std::underlying_type<T>::type)(b);	\
+	}																						\
+	static NLR_INLINE bool operator>(T a, T b) noexcept {									\
+		return (std::underlying_type<T>::type)(a) > (std::underlying_type<T>::type)(b);		\
+	}																						\
+	static NLR_INLINE bool operator>=(T a, T b) noexcept {									\
+		return (std::underlying_type<T>::type)(a) >= (std::underlying_type<T>::type)(b);	\
+	}
+
+/// @brief Defines bitwise operators for enum.
+#define NLR_ENUM_BIT_FLAGS(T)										\
+	static NLR_INLINE constexpr T operator~(T a) noexcept {			\
+		return T(~(std::underlying_type<T>::type)(a));				\
+	}																\
+	static NLR_INLINE constexpr T operator|(T a, T b) noexcept {	\
+		return T((std::underlying_type<T>::type)(a) |				\
+			(std::underlying_type<T>::type)(b));					\
+	}																\
+	static NLR_INLINE constexpr T operator&(T a, T b) noexcept {	\
+		return T((std::underlying_type<T>::type)(a) &				\
+			(std::underlying_type<T>::type)(b));					\
+	}																\
+	static NLR_INLINE constexpr T operator^(T a, T b) noexcept {	\
+		return T((std::underlying_type<T>::type)(a) ^				\
+			(std::underlying_type<T>::type)(b));					\
+	}																\
+	static NLR_INLINE T& operator|=(T& a, T b) noexcept {			\
+		a = T((std::underlying_type<T>::type)(a) |					\
+			(std::underlying_type<T>::type)(b));					\
+		return a;													\
+	}																\
+	static NLR_INLINE T& operator&=(T& a, T b) noexcept {			\
+		a = T((std::underlying_type<T>::type)(a) &					\
+			(std::underlying_type<T>::type)(b));					\
+		return a;													\
+	}																\
+	static NLR_INLINE T& operator^=(T& a, T b) noexcept {			\
+		a = T((std::underlying_type<T>::type)(a) ^					\
+			(std::underlying_type<T>::type)(b));					\
+		return a;													\
+	}
 
 #endif

@@ -9,9 +9,6 @@
 NLR_BEGIN_NAMESPACE
 
 class NlrString {
-private:
-	NLR_TYPE_REMOVE_CONSTRUCTORS(NlrString)
-	NLR_TYPE_REMOVE_COPY(NlrString)
 };
 
 template<UintPtr Length>

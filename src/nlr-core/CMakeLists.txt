@@ -18,13 +18,16 @@ else()
 endif()
 
 set(NLR_SRC
-	test.cpp
+	${CMAKE_CURRENT_LIST_DIR}/test.cpp
+	${CMAKE_CURRENT_LIST_DIR}/vm/runtime.cpp
+	${CMAKE_CURRENT_LIST_DIR}/vm/domain.cpp
 )
 
 message("== Nlr build info ==")
 message(" | NLR_TARGET_TYPE=${NLR_TARGET_TYPE}")
 
 add_library(nlr ${NLR_TARGET_TYPE} ${NLR_SRC})
+target_include_directories(nlr PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 set_target_properties(nlr PROPERTIES OUTPUT_NAME "nlr")
 
 add_library(nlr::nlr ALIAS nlr)

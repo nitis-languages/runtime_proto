@@ -8,7 +8,7 @@
 
 NLR_BEGIN_NAMESPACE
 
-enum class NlrResult : Sint32 {
+enum class Result : Sint32 {
 	/// @brief Operation was executed successfully.
 	Success = 0,
 	/// @brief Operation failed with unknown error.
@@ -19,6 +19,7 @@ enum class NlrResult : Sint32 {
 	/// Usually invalid machine code.
 	ExecutionError = -3,
 };
+NLR_ENUM_COMPARABLE(Result)
 
 template<typename From, typename To>
 static NLR_INLINE To ptr_cast(From from) noexcept { return (To)from; }
