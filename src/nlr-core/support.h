@@ -35,7 +35,22 @@ static NLR_INLINE Target *move_ptr(void *ptr, SintPtr byte_offset) noexcept {
 	return ptr_cast<Uint8 *, Target *>(
 		ptr_cast<void *, Uint8 *>(ptr) + byte_offset
 	);
-};
+}
+
+template<typename Lhs, typename Rhs>
+static NLR_INLINE bool has_flag(Lhs value, Rhs flag) noexcept {
+	return (value & flag) != 0;
+}
+
+template<typename Lhs, typename Rhs>
+static NLR_INLINE bool has_flags(Lhs value, Rhs flags) noexcept {
+	return (value & flags) == flags;
+}
+
+template<typename Integer>
+static NLR_INLINE Integer align_up(Integer value, Integer granularity) noexcept {
+	return ((operand + (granularity - 1)) & ~(granularity - 1));
+}
 
 NLR_END_NAMESPACE
 #endif
