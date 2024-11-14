@@ -83,18 +83,31 @@ static NLR_INLINE constexpr Uint64 fill_trailing_bits(Uint64 value) noexcept {
 	return value;
 }
 
+/// @brief Fill trailing bits.
+/// @tparam Integer Any integral type.
+/// @param value Value to be fill trailing bits.
+/// @return Value with set trailing bits.
 template<typename Integer>
 static NLR_INLINE constexpr Integer fill_trailing_bits(Integer value) noexcept {
 	return fill_trailing_bits((typename std::make_unsigned<Integer>::type)value);
 }
 
+/// @brief Align up value by granularity.
+/// @tparam Integer Any integral type.
+/// @param value Value to align up.
+/// @param granularity Granularity.
+/// @return If value is 0 returns 0; otherwise returns value aligned by granularity.
 template<typename Integer>
 static NLR_INLINE constexpr Integer align_up(Integer value, Integer granularity) noexcept {
 	return ((value + (granularity - 1)) & ~(granularity - 1));
 }
 
+/// @brief Align up the value to the nearest greater power of two.
+/// @tparam Integer Any integral type.
+/// @param value Value to align up.
+/// @return If value is 0 returns 0; if value is power of 2, returns value; otherwise nearest greater power of 2.
 template<typename Integer>
-static NLR_INLINE Integer align_up_power2(Integer value) {
+static NLR_INLINE Integer align_up_power2(Integer value) noexcept {
 	return fill_trailing_bits<Integer>(value - 1u) + 1u;
 }
 
