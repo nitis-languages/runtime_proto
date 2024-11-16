@@ -3,6 +3,7 @@
 
 #ifndef _NLR_STRING_H
 #define _NLR_STRING_H
+
 #include "../support.h"
 #include <string>
 

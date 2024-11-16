@@ -47,6 +47,29 @@ typedef double		Float64;
 	#endif
 #endif
 
+// Platform dependent
+#if (defined(__ARMEB__))  || \
+	(defined(__MIPSEB__)) || \
+	(defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__))
+	#define NLR_BYTE_ORDER_LE 0
+	#define NLR_BYTE_ORDER_BE 1
+#else
+	#define NLR_BYTE_ORDER_LE 1
+	#define NLR_BYTE_ORDER_BE 0
+#endif
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+	#ifndef _WIN64
+		#error "32-bit Windows is not supported."
+	#endif
+#elif __APPLE__
+	#include <TargetConditionals.h>
+	#error "Apple systems are not supported."
+#else
+	#error "This system is not supported."
+#endif
+
+
 // Force inline
 #if !defined(DEBUG) && defined(__GNUC__)
   #define NLR_INLINE inline __attribute__((__always_inline__))

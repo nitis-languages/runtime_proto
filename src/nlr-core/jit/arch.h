@@ -18,5 +18,21 @@ enum class Architecture : Uint8 {
 	Host = X64,
 };
 
+enum class BitEndianess : Uint8 {
+	/// @brief Integral bits stored from right to left by 8-bit groups in reverse order.
+	LittleEndian = 0,
+	
+	/// @brief Integral bits stored from right to left.
+	BigEndian = 1,
+
+	/// @brief The endianess of host compiler.
+	Host = 
+	#if NLR_BYTE_ORDER_BE
+		BigEndian
+	#else
+		LittleEndian
+	#endif
+};
+
 NLR_END_NAMESPACE
 #endif

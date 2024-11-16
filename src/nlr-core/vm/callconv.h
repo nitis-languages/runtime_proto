@@ -3,6 +3,7 @@
 
 #ifndef _NLR_CALLCONV_H
 #define _NLR_CALLCONV_H
+
 #include "../nlr-core-api.h"
 
 NLR_BEGIN_NAMESPACE
