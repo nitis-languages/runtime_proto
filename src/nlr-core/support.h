@@ -41,7 +41,7 @@ static NLR_INLINE constexpr Target *move_ptr(void *ptr, SintPtr byte_offset) noe
 
 template<typename Lhs, typename Rhs>
 static NLR_INLINE constexpr bool has_flag(Lhs value, Rhs flag) noexcept {
-	return (value & flag) != 0;
+	return (value & flag) != (Rhs)0;
 }
 
 template<typename Lhs, typename Rhs>

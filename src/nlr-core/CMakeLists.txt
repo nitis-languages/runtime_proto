@@ -32,12 +32,16 @@ elseif (NLR_STATIC)
 	set(NLR_TARGET_TYPE "STATIC")
 else()
 	set(NLR_TARGET_TYPE "SHARED")
-	add_definitions(-DNLR_EXPORTS)
+	list(APPEND NLR_PRIVATE_CFLAGS
+		-DNLR_EXPORTS
+	)
 endif()
 
 set(NLR_SRC
 	${CMAKE_CURRENT_LIST_DIR}/vm/runtime.cpp
 	${CMAKE_CURRENT_LIST_DIR}/vm/domain.cpp
+	${CMAKE_CURRENT_LIST_DIR}/vm/zone.cpp
+	${CMAKE_CURRENT_LIST_DIR}/vm/virtual-memory-win32.cpp
 )
 
 message("== Nlr build info ==")

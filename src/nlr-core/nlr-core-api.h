@@ -62,9 +62,13 @@ typedef double		Float64;
 	#ifndef _WIN64
 		#error "32-bit Windows is not supported."
 	#endif
+	#define NLR_PLATFORM "Windows"
+	#define NLR_PLATFORM_WINDOWS 1
 #elif __APPLE__
 	#include <TargetConditionals.h>
 	#error "Apple systems are not supported."
+	#define NLR_PLATFORM "Unknown Apple"
+	#define NLR_PLATFORM_MACOS 1
 #else
 	#error "This system is not supported."
 #endif
