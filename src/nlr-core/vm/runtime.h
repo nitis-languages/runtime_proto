@@ -6,6 +6,7 @@
 
 #include "../nlr-core-api.h"
 #include "string.h"
+#include "zone.h"
 
 NLR_BEGIN_NAMESPACE
 
@@ -13,10 +14,10 @@ class Domain;
 
 class Runtime {
 private:
-	Domain *root_domain;
-	Uint32 domain_counter;
+	nlr::Zone zone;
+
 public:
-	NLR_API Runtime(void *const configuration, NlrString *const root_domain_name);
+	NLR_API Runtime();
 	
 	NLR_API Result dispose();
 };

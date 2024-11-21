@@ -3,14 +3,22 @@
 
 #include "runtime.h"
 #include "domain.h"
+#include "zone.h"
 
-nlr::Runtime::Runtime(void *const configuration, NlrString *const root_domain_name) {
-	nlr::unused(configuration, root_domain_name);
-	this->domain_counter = 1; // 1 `Cause we create one domain right down here.
-	this->root_domain = new nlr::Domain(0, nullptr);
+nlr::Runtime::Runtime() {
+	this->zone = Zone(1);
+	if (!this->zone.valid()) {
+		// log
+		return;
+	}
+
+	for (Uint64 i = 0; i < 1024; i++) {
+		zone.allocate(sizeof(Uint32));
+	}
 }
 
 nlr::Result nlr::Runtime::dispose() {
-	delete this->root_domain;
+	this->zone.release_all();
+
 	return nlr::Result::Success;
 }

@@ -9,10 +9,14 @@
 NLR_BEGIN_NAMESPACE
 
 enum class MemoryFlags : Uint8 {
-	NoAccess	= 0x00,
-	Read		= 0x01,
-	Write		= 0x02,
-	Execute		= 0x04,
+	NoAccess			= 0x00,
+	Read				= 0x01,
+	Write				= 0x02,
+	ReadWrite			= 0x03,
+	Execute				= 0x04,
+	ExecuteRead			= 0x05,
+	ExecuteWrite		= 0x06,
+	ExecuteReadWrite	= 0x07,
 	//Jit			= 0x10, /* Uncomment when adding MacOS support */
 };
 NLR_ENUM_BIT_FLAGS(MemoryFlags)

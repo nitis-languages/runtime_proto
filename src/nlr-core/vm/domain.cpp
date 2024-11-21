@@ -4,8 +4,11 @@
 #include "runtime.h"
 #include "domain.h"
 
-nlr::Domain::Domain(Uint32 identifier, Domain *const parent) noexcept {
-	this->identifier = identifier;
-	this->childs = std::vector<Domain>();
-	this->parent = parent;
+nlr::Result nlr::Domain::create_sub_domain(Domain *domain) {
+	nlr::unused(domain);
+	return nlr::Result::Success;
+}
+
+nlr::Result nlr::Domain::dispose() {
+	return nlr::Result::Success;
 }

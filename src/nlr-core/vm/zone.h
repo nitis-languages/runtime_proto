@@ -1,7 +1,7 @@
 // Licensed to the NiTiS-Dev under one or more agreements.
 // The NiTiS-Dev licenses this file to you under the MIT license.
 
-#if !defined(_NLR_ZONE_H) && defined(NLR_EXPORTS)
+#ifndef _NLR_ZONE_H
 #define _NLR_ZONE_H
 
 #include "../support.h"
@@ -24,13 +24,22 @@ private:
 		constexpr UintPtr available() {
 			return size - (pointer - ptr_cast<Node *, Uint8 *>(this));
 		}
+
+		NLR_INLINE Uint8 *advance_pointer(UintPtr offset) {
+			return this->pointer = move_ptr<Uint8>(this->pointer, offset);
+		}
 	};
 
 	Node *last_node;
 public:
+	Zone() = default;
 	Zone(UintPtr initial_size);
 
 	void *allocate(UintPtr size);
+
+	NLR_INLINE bool valid() {
+		return this->last_node != nullptr;
+	}
 
 	void release_all();
 };

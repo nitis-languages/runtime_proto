@@ -22,7 +22,7 @@ DWORD get_win32_protect_flags(MemoryFlags flags) {
 		} else {
 			value = PAGE_EXECUTE;
 		}
-	} else if (has_flag(flags, MemoryFlags::Read | MemoryFlags::Write)) {
+	} else if (has_flag(flags, MemoryFlags::ReadWrite)) {
 		value = has_flag(flags, MemoryFlags::Write) ? PAGE_READWRITE : PAGE_READONLY;
 	} else {
 		value = PAGE_NOACCESS;
