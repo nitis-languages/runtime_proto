@@ -39,7 +39,7 @@ void *nlr::Zone::allocate(UintPtr size) {
 	new_node->size = required_size;
 	this->last_node = new_node;
 
-	return nullptr;
+	return new_node->advance_pointer(size);
 }
 
 void nlr::Zone::release_all() {

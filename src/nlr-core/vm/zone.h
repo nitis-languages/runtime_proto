@@ -26,7 +26,10 @@ private:
 		}
 
 		NLR_INLINE Uint8 *advance_pointer(UintPtr offset) {
-			return this->pointer = move_ptr<Uint8>(this->pointer, offset);
+			Uint8 *data_ptr = this->pointer;
+			this-> pointer = move_ptr<Uint8>(this->pointer, offset);
+
+			return data_ptr;
 		}
 	};
 

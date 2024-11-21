@@ -11,10 +11,6 @@ nlr::Runtime::Runtime() {
 		// log
 		return;
 	}
-
-	for (Uint64 i = 0; i < 1024; i++) {
-		zone.allocate(sizeof(Uint32));
-	}
 }
 
 nlr::Result nlr::Runtime::dispose() {
