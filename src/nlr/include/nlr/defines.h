@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <array>
 
 // Prettier numeric types
 typedef uint8_t		UInt8;

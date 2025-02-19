@@ -44,6 +44,7 @@ set(NLR_SRC
 	${CMAKE_CURRENT_LIST_DIR}/src/zone.cpp
 	${CMAKE_CURRENT_LIST_DIR}/src/virtual-memory-win32.cpp
 	${CMAKE_CURRENT_LIST_DIR}/src/test.cpp
+	${CMAKE_CURRENT_LIST_DIR}/src/runtime.cpp
 )
 
 message("== Nlr build info ==")

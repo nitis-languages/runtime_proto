@@ -4,13 +4,14 @@
 #ifndef _NLR_X64_COMPILER
 #define _NLR_X64_COMPILER
 
+#include "../jit-compiler.h"
+
 namespace nlr::jit::x64 {
 
-class JitCompiler {
+class DumbX64Compiler : public JitCompiler {
 public:
-	void generate_stub(void *method) noexcept;
-
-	void generate_code(void *method) noexcept;
+	DumbX64Compiler(Runtime *runtime) : JitCompiler(runtime)
+	{}
 };
 
 } // namespace nlr::jit::x64

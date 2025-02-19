@@ -5,6 +5,8 @@
 #define _NLR_SUPPORT_H
 
 #include <nlr/defines.h>
+#include <array>
+#include <span>
 
 namespace nlr {
 
