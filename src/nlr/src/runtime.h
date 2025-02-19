@@ -14,11 +14,15 @@ private:
 	std::vector<vm::Library *> libraries;
 
 public:
+	Runtime() noexcept;
+
 	String *get_runtime_identifier() const noexcept;
+
+	void *load_library(char *path) const noexcept;
 };
 
 [[noreturn]]
-void report_critical_error(SInt32 error_code, const char8_t *message) noexcept;
+void report_critical_error(SInt32 error_code, const char *message) noexcept;
 
 } // namespace nlr
 #endif

@@ -10,11 +10,11 @@ namespace nlr::jit {
 
 class JitCompiler {
 protected:
-	Runtime *runtime;
+	const Runtime *runtime;
 public:
-	void generate_stub(void *method) noexcept;
+	virtual void generate_stub(void *method) noexcept = 0;
 
-	void generate_code(void *method) noexcept;
+	virtual void generate_code(void *method) noexcept = 0;
 
 	JitCompiler(Runtime *runtime)
 		: runtime(runtime)

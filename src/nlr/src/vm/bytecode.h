@@ -117,12 +117,12 @@ enum class BytecodeClass : UInt8 {
 };
 
 struct InstructionInfo {
-private:
+public:
 	FlowControl flow;
 	BytecodeClass _class;
 	UInt8 size;
 	Reserved<1> reserved;
-public:
+
 	InstructionInfo()
 		: flow(FlowControl::Next)
 		, _class(BytecodeClass::Reserved)
@@ -200,7 +200,7 @@ static const InstructionInfo instructionsInfo[UINT8_MAX] {
 	{FlowControl::Meta, BytecodeClass::Prefix, 1}, // TwoByteInstructionPrefix
 };
 
-constexpr InstructionInfo get_instruction_info(UInt8 prefix = 0x00, UInt8 bytecode) {
+constexpr InstructionInfo get_instruction_info(UInt8 prefix, UInt8 bytecode) {
 	if (prefix == 0x00) {
 		return instructionsInfo[bytecode];
 	}
