@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/src/nlr-core/"
+                "${workspaceFolder}/src/nlr/include"
             ],
             "defines": [
                 "_DEBUG",

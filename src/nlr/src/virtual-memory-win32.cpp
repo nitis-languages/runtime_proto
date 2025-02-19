@@ -5,9 +5,9 @@
 #if NLR_PLATFORM_WINDOWS
 #include <Windows.h>
 
-NLR_BEGIN_NAMESPACE
+namespace nlr {
 
-NLR_API void flush_instruction_cache(void *memory, UintPtr size) noexcept {
+void flush_instruction_cache(void *memory, UIntPtr size) noexcept {
 	FlushInstructionCache(GetCurrentProcess(), memory, size);
 }
 
@@ -31,42 +31,42 @@ DWORD get_win32_protect_flags(MemoryFlags flags) {
 	return value;
 }
 
-NLR_API Result allocate(void **out_memory, UintPtr size, MemoryFlags flags) noexcept {
+bool allocate(void **out_memory, UIntPtr size, MemoryFlags flags) noexcept {
 	*out_memory = nullptr;
 	constexpr DWORD allocation_mode = MEM_COMMIT | MEM_RESERVE;
 	DWORD protect = get_win32_protect_flags(flags);
 	*out_memory = VirtualAlloc(nullptr, size, allocation_mode, protect);
 
-	return *out_memory ? Result::Success : Result::NotEnoughMemory;
+	return *out_memory;
 }
 
-NLR_API Result protect(void *memory, UintPtr size, MemoryFlags flags) noexcept {
+bool protect(void *memory, UIntPtr size, MemoryFlags flags) noexcept {
 	DWORD protect = get_win32_protect_flags(flags);
 	DWORD previous_protect;
 
 	if (!VirtualProtect(memory, size, protect, &previous_protect)) {
-		return Result::InvalidArgument;
+		return false;
 	}
 
-	return Result::Success;
+	return true;
 }
 
-NLR_API Result release(void *memory, UintPtr size) noexcept {
+bool release(void *memory, UIntPtr size) noexcept {
 	unused(size);
 
 	constexpr DWORD free_type = MEM_RELEASE;
-	return VirtualFree(memory, 0, free_type) ? Result::Success : Result::InvalidArgument;
+	return VirtualFree(memory, 0, free_type);
 }
 
-NLR_API UintPtr get_page_size() noexcept {
+UIntPtr get_page_size() noexcept {
 	SYSTEM_INFO sys_info;
 	GetSystemInfo(&sys_info);
 	return sys_info.dwPageSize;
 }
 
-NLR_API UintPtr get_large_page_size() noexcept {
+UIntPtr get_large_page_size() noexcept {
 	return GetLargePageMinimum();
 }
 
-NLR_END_NAMESPACE
+} // namespace nlr
 #endif

@@ -4,11 +4,11 @@
 #ifndef _NLR_BYTECODE_H
 #define _NLR_BYTECODE_H
 
-#include "../support.h"
+#include "../utils.h"
 
-NLR_BEGIN_NAMESPACE
+namespace nlr::vm {
 
-enum class Bytecode : Uint8 {
+enum class Bytecode : UInt8 {
 	Nope						= 0x00,
 	Break						= 0x01,
 	PushArg						= 0x02,
@@ -64,8 +64,43 @@ enum class Bytecode : Uint8 {
 	BitShiftRight				= 0x31,
 	ArithmeticShiftRight		= 0x32,
 
+	PushGenericArgumentType		= 0x33,
+	PushGenericArgumentConst	= 0x34,
+
+	// StackAlloc				= 0x35,
+
 	TwoByteInstructionPrefix	= 0xFF,
 };
 
-NLR_END_NAMESPACE
+enum class FlowControl : UInt8 {
+	/// @brief Normal flow.
+	Next = 0,
+	/// @brief Break instruction.
+	Break = 1,
+	/// @brief Call instruction.
+	Call = 2,
+	/// @brief Conditional branch instruction.
+	BranchConditional = 3,
+	/// @brief Branch instruction.
+	Branch = 4,
+	/// @brief Return instruction.
+	Return = 5,
+	/// @brief Instruction is prefix.
+	Meta = 0xFF
+};
+
+enum class BytecodeClass : UInt8 {
+	Reserved = 0,
+	Instruction = 1,
+	Prefix = 0xFF,
+};
+
+struct InstructionInfo {
+	FlowControl flow;
+	BytecodeClass kind;
+	UInt8 size;
+	Reserved<1> reserved;
+};
+
+} // namespace nlr::vm
 #endif

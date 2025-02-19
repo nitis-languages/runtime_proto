@@ -14,11 +14,14 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" OR "x${CMAKE_CXX_COMPILER_FRONTEN
 
 	list(APPEND NLR_PRIVATE_CFLAGS_DBG
 		-GS # Buffer security
+		-DDEBUG
 	)
 	
 	list(APPEND NLR_PRIVATE_CFLAGS_RLS
 		-GS- # Disable buffer security
 		-O2  # Maximum speed
+		-DNDEBUG
+		-DRELEASE
 	)
 endif()
 
@@ -38,10 +41,9 @@ else()
 endif()
 
 set(NLR_SRC
-	${CMAKE_CURRENT_LIST_DIR}/vm/runtime.cpp
-	${CMAKE_CURRENT_LIST_DIR}/vm/domain.cpp
-	${CMAKE_CURRENT_LIST_DIR}/vm/zone.cpp
-	${CMAKE_CURRENT_LIST_DIR}/vm/virtual-memory-win32.cpp
+	${CMAKE_CURRENT_LIST_DIR}/src/zone.cpp
+	${CMAKE_CURRENT_LIST_DIR}/src/virtual-memory-win32.cpp
+	${CMAKE_CURRENT_LIST_DIR}/src/test.cpp
 )
 
 message("== Nlr build info ==")
@@ -53,7 +55,6 @@ message(" | NLR_LIBRARIES = ${NLR_LIBRARIES}")
 
 add_library(nlr ${NLR_TARGET_TYPE} ${NLR_SRC})
 target_compile_options(nlr PRIVATE ${NLR_PRIVATE_CFLAGS} $<$<CONFIG:Debug>:${NLR_PRIVATE_CFLAGS_DBG}> $<$<NOT:$<CONFIG:Debug>>:${NLR_PRIVATE_CFLAGS_RLS}>)
-target_include_directories(nlr PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-set_target_properties(nlr PROPERTIES OUTPUT_NAME "nlr")
+target_include_directories(nlr PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 
 add_library(nlr::nlr ALIAS nlr)

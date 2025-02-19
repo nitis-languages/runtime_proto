@@ -4,30 +4,30 @@
 #ifndef _NLR_ZONE_H
 #define _NLR_ZONE_H
 
-#include "../support.h"
+#include "utils.h"
 #include "virtual-memory.h"
 
-NLR_BEGIN_NAMESPACE
+namespace nlr {
 
 /// @brief Zone is incremental allocator. Once place in memory allocated, it can't be freed, unless free whole zone.
 class Zone {
 private:
 	struct Node {
 		Node *prev;
-		UintPtr size; // Size of allocated memory (included node)
-		Uint8 *pointer;
+		UIntPtr size; // Size of allocated memory (included node)
+		UInt8 *pointer;
 
-		constexpr Uint8 *data() {
-			return move_ptr<Uint8>(this, +sizeof(Node));
+		constexpr UInt8 *data() {
+			return move_ptr<UInt8>(this, +sizeof(Node));
 		}
 
-		constexpr UintPtr available() {
-			return size - (pointer - ptr_cast<Node *, Uint8 *>(this));
+		constexpr UIntPtr available() {
+			return size - (pointer - ptr_cast<Node *, UInt8 *>(this));
 		}
 
-		NLR_INLINE Uint8 *advance_pointer(UintPtr offset) {
-			Uint8 *data_ptr = this->pointer;
-			this-> pointer = move_ptr<Uint8>(this->pointer, offset);
+		NLR_INLINE UInt8 *advance_pointer(UIntPtr offset) {
+			UInt8 *data_ptr = this->pointer;
+			this-> pointer = move_ptr<UInt8>(this->pointer, offset);
 
 			return data_ptr;
 		}
@@ -36,9 +36,9 @@ private:
 	Node *last_node;
 public:
 	Zone() = default;
-	Zone(UintPtr initial_size);
+	Zone(UIntPtr initial_size);
 
-	void *allocate(UintPtr size);
+	void *allocate(UIntPtr size);
 
 	NLR_INLINE bool valid() {
 		return this->last_node != nullptr;
@@ -47,5 +47,5 @@ public:
 	void release_all();
 };
 
-NLR_END_NAMESPACE
+} // namespace nlr
 #endif
